@@ -1,4 +1,4 @@
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import AccountModels from '../models/AccountModels';
 import mongoose from 'mongoose';
 class FinanceController {
@@ -34,8 +34,10 @@ class FinanceController {
 
 
     DeleteFinance(request: Request, response: Response) {
-        let { _id } = request.body
-        AccountModels.remove({ _id: _id }).then((data) => {
+        
+        
+        console.log(request.params.id)
+        AccountModels.remove({ _id: request.params.id }).then((data) => {
 
             return response.status(202).send({ Delete: true })
         }).catch((err) => response.status(202).send({ Delete: false }))
